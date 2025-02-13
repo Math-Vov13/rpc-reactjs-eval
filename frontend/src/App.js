@@ -1,3 +1,4 @@
+// Libraries
 import React, { useState, useContext, createContext } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
@@ -17,6 +18,8 @@ import {
 
 const AuthContext = createContext(null);
 
+
+// App
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -89,12 +92,12 @@ const LoginPage = () => {
 
 const Dashboard = () => {
   const { logout } = useContext(AuthContext);
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState([ // All taks - for examples.
     { id: '1', title: 'Développer la page d\'accueil', description: 'Créer une interface moderne', status: 'IN_PROGRESS', userId: '1', date: '2024-02-13' },
     { id: '2', title: 'Optimiser les performances', description: 'Améliorer le temps de chargement', status: 'TODO', userId: '1', date: '2024-02-14' },
     { id: '3', title: 'Tests unitaires', description: 'Écrire les tests pour les composants', status: 'DONE', userId: '1', date: '2024-02-12' },
   ]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // Search request
 
   const filteredTasks = tasks.filter(task => 
     task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -306,6 +309,7 @@ const TaskList = ({ tasks, onUpdateStatus }) => {
                   >
                     <Loader2 className="h-4 w-4" />
                   </Button>
+
                   <Button 
                     variant="ghost" 
                     size="sm"
@@ -322,6 +326,8 @@ const TaskList = ({ tasks, onUpdateStatus }) => {
                     disabled={task.status === 'DONE'}
                     className="text-green-500 hover:text-green-700"
                   >
+
+
                     <CheckCircle2 className="h-4 w-4" />
                   </Button>
                 </div>

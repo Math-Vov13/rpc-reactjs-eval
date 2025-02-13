@@ -7,7 +7,6 @@ import { errorHandler } from './middleware/errorHandler';
 import { userService } from './services/userService';
 import { taskService } from './services/taskService';
 
-// Charger les variables d'environnement
 config();
 
 const app = express();
@@ -18,7 +17,7 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-// Configuration JSON-RPC
+// JSON-RPC
 server.addMethod('user.create', userService.create);
 server.addMethod('user.get', userService.get);
 server.addMethod('user.update', userService.update);
@@ -29,7 +28,10 @@ server.addMethod('task.get', taskService.get);
 server.addMethod('task.update', taskService.update);
 server.addMethod('task.delete', taskService.delete);
 
-// Route principale pour les appels JSON-RPC
+
+
+
+
 app.post('/api', async (req, res) => {
   const jsonRPCRequest = req.body;
   const result = await server.receive(jsonRPCRequest);
@@ -41,7 +43,7 @@ app.post('/api', async (req, res) => {
   }
 });
 
-// Middleware de gestion d'erreurs
+// Middleware Error Handler
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
